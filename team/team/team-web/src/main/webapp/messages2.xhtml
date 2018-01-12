@@ -1,0 +1,146 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">Message</ui:define>
+
+	<ui:define name="head">
+		<style type="text/css">
+.ui-button {
+	margin-right: 4px;
+}
+
+.form-grid td {
+	padding: 16px 2px;
+}
+</style>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<div class="ui-g">
+				<div class="ui-g-12">
+					<div class="card">
+						<h1>Messages</h1>
+						<p:tooltip />
+
+						<p:messages showDetail="true" autoUpdate="true" closable="true" />
+
+						<p:commandButton value="Info"
+							actionListener="#{messagesView.info}" style="width:100px"
+							process="@this" />
+						<p:commandButton value="Warn"
+							actionListener="#{messagesView.warn}"
+							styleClass="deep-orange-button" style="width:100px"
+							process="@this" />
+						<p:commandButton value="Error"
+							actionListener="#{messagesView.error}" styleClass="red-button"
+							style="width:100px" process="@this" />
+						<p:commandButton value="Fatal"
+							actionListener="#{messagesView.fatal}" styleClass="indigo-button"
+							style="width:100px" process="@this" />
+
+						<p:growl id="growl" showDetail="true" sticky="true" />
+
+						<p:panelGrid id="grid" columns="3" style="margin-top:20px"
+							styleClass="ui-panelgrid-blank form-group">
+							<p:outputLabel for="default" value="Default:" />
+							<p:inputText id="default" required="true" />
+							<p:message for="default" />
+
+							<p:outputLabel for="txt" value="Text:" />
+							<p:inputText id="txt" required="true" />
+							<p:message for="txt" display="text" />
+
+							<p:outputLabel for="icon" value="Icon:" />
+							<p:inputText id="icon" required="true" />
+							<p:message for="icon" display="icon" />
+
+							<p:outputLabel for="inline" value="Material Error:" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="inline" required="true" />
+								<label>Default</label>
+								<p:message for="inline" />
+							</h:panelGroup>
+							<p:spacer />
+
+							<p:outputLabel for="mtext" value="Material Text Error:" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="mtext" required="true" />
+								<label>Text</label>
+								<p:message for="mtext" display="text" />
+							</h:panelGroup>
+							<p:spacer />
+
+							<p:outputLabel for="micon" value="Material Icon Error:" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="micon" required="true" />
+								<label>Icon</label>
+								<p:message for="micon" display="icon" />
+							</h:panelGroup>
+							<p:spacer />
+
+							<p:outputLabel for="console" value="Default Error:" />
+							<p:selectOneMenu id="console"
+								value="#{selectOneMenuView.console}" style="margin-bottom:10px;"
+								required="true">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+								<f:selectItem itemLabel="PS4" itemValue="PS4" />
+								<f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+							</p:selectOneMenu>
+							<p:message for="console" />
+
+							<p:outputLabel for="console2" value="Md-select:" />
+							<h:panelGroup styleClass="md-selectonemenu">
+								<p:selectOneMenu id="console2"
+									value="#{selectOneMenuView.console}" required="true"
+									style="top:5px;">
+									<f:selectItem itemLabel="Select One" itemValue="" />
+									<f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+									<f:selectItem itemLabel="PS4" itemValue="PS4" />
+									<f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+								</p:selectOneMenu>
+								<p:message for="console2" />
+							</h:panelGroup>
+							<p:spacer />
+
+							<p:outputLabel for="console3" value="Material Error:" />
+							<h:panelGroup styleClass="md-selectonemenu">
+								<p:selectOneMenu id="console3"
+									value="#{selectOneMenuView.console}" required="true">
+									<f:selectItem itemLabel="Select One" itemValue="" />
+									<f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+									<f:selectItem itemLabel="PS4" itemValue="PS4" />
+									<f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+								</p:selectOneMenu>
+								<p:message for="console3" />
+							</h:panelGroup>
+							<p:spacer />
+
+
+							<p:outputLabel for="text2" value="Text Material Error:" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputTextarea id="text2" rows="3" placeholder="Your Message"
+									autoResize="false" required="true" />
+								<p:message for="text2" />
+							</h:panelGroup>
+							<p:spacer />
+
+
+
+						</p:panelGrid>
+
+						<p:commandButton id="submitButton" value="Submit"
+							actionListener="#{messagesView.growlMessage()}"
+							update="grid growl" styleClass="GreenButton" />
+					</div>
+				</div>
+			</div>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
